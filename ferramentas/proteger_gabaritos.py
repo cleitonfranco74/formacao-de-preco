@@ -1,4 +1,4 @@
-"""Protege com senha os gabaritos das empresas novas do site.
+"""Protege com senha os gabaritos dos exercícios do site.
 
 O GitHub Pages só serve arquivos estáticos, então a senha não é conferida por
 um servidor: o gabarito é CRIPTOGRAFADO (AES-256-GCM, chave derivada da senha
@@ -36,6 +36,12 @@ ITERACOES = 600_000
 
 # id da seção do exercício -> gabarito .docx correspondente
 PROTEGER = {
+    "agroindustria-grao-dourado-p1": "Agroindustria_Grao_Dourado_Custos_MC_Gabarito.docx",
+    "agroindustria-grao-dourado-p2": "Agroindustria_Grao_Dourado_Custeio_Absorcao_Gabarito.docx",
+    "cervejaria-serra-azul-p1": "Cervejaria_Serra_Azul_Custos_MC_Gabarito.docx",
+    "cervejaria-serra-azul-p2": "Cervejaria_Serra_Azul_Custeio_Absorcao_Gabarito.docx",
+    "usina-milho-ouro-bioenergia-p1": "Usina_Milho_Ouro_Custos_MC_Gabarito.docx",
+    "usina-milho-ouro-bioenergia-p2": "Usina_Milho_Ouro_Custeio_Absorcao_Gabarito.docx",
     "confeccoes-serra-do-cerrado-p1": "Confeccoes_Serra_do_Cerrado_Custos_MC_Gabarito.docx",
     "confeccoes-serra-do-cerrado-p2": "Confeccoes_Serra_do_Cerrado_Custeio_Absorcao_Gabarito.docx",
     "metalurgica-portal-do-cerrado-p1": "Metalurgica_Portal_do_Cerrado_Custos_MC_Gabarito.docx",

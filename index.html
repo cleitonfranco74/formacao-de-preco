@@ -4349,6 +4349,40 @@ tr.aval td{color:var(--nova)}
     return r;
   }
 
+  // ---------------------------------------------------------------- DRE gerencial do simulador
+  // custeio variável: custos e despesas variáveis por produto; custos e despesas fixos só no total
+  function dreGerencial(ex, r) {
+    var cel = function (v, casas, cls) {
+      return '<td class="r num' + (cls ? " " + cls : "") + '">' + (v == null ? "—" : num(v, casas == null ? 2 : casas)) + "</td>";
+    };
+    var linha = function (rot, f, total, cls, casas) {
+      return "<tr" + (cls ? ' class="' + cls + '"' : "") + "><td>" + rot + "</td>" +
+        r.ps.map(function (p) { return cel(f(p), casas); }).join("") + cel(total, casas, total != null && total < 0 ? "neg" : "") + "</tr>";
+    };
+    var nada = function () { return null; };
+    var rotDf = ex.markup ? "(−) Despesas administrativas (" + pct(ex.markup.adm) + " da receita)" : "(−) Despesas fixas";
+    var h = '<h3>DRE gerencial: custos e despesas, fixos e variáveis</h3><div class="tabela"><table><thead><tr><th>Valores do ano ($)</th>' +
+      r.ps.map(function (p) { return '<th class="r">' + esc(p.nome) + "</th>"; }).join("") + '<th class="r">Total</th></tr></thead><tbody>';
+    h += linha("Receita de vendas", function (p) { return p.receita; }, r.receita);
+    h += linha("(−) Custos variáveis", function (p) { return p.cvT; }, r.cvTotal);
+    h += linha("(−) Despesas variáveis", function (p) { return p.dvT; }, r.dv);
+    h += linha("(=) Margem de contribuição", function (p) { return p.mc; }, r.mc, "total");
+    h += "<tr class=\"sub\"><td>Margem de contribuição (% da receita)</td>" + r.ps.map(function (p) {
+      return '<td class="r num">' + (p.receita ? pct(p.mc / p.receita) : "—") + "</td>";
+    }).join("") + '<td class="r num">' + (r.receita ? pct(r.mc / r.receita) : "—") + "</td></tr>";
+    h += linha("(−) Custos fixos", nada, r.cif);
+    h += linha(rotDf, nada, r.df);
+    h += linha("(=) Resultado operacional", nada, r.resultado, "total");
+    h += '<tr><td colspan="' + (r.ps.length + 2) + '"><b>Por unidade</b></td></tr>';
+    h += linha("Preço", function (p) { return p.preco; }, null, "sub", 4);
+    h += linha("Custo variável unitário", function (p) { return p.cvu; }, null, "sub", 4);
+    h += linha("Despesa variável unitária", function (p) { return p.dvu; }, null, "sub", 4);
+    h += linha("Margem de contribuição unitária", function (p) { return p.mcu; }, null, "sub", 4);
+    h += '</tbody></table></div><p class="small muted">No custeio variável, custos e despesas fixos não são distribuídos entre os produtos: ' +
+      "entram uma única vez, no total, depois da margem de contribuição.</p>";
+    return h;
+  }
+
   // ---------------------------------------------------------------- gráficos do simulador
   var CORES = ["var(--s1)", "var(--s2)", "var(--s3)"];
   function composicao(r) {
@@ -4479,7 +4513,7 @@ tr.aval td{color:var(--nova)}
         kpi("Margem de contribuição", moeda(r.mc, 0), delta(r.mc, ref.mc)) +
         kpi("Resultado operacional", moeda(r.resultado, 0), delta(r.resultado, ref.resultado), r.resultado < 0 ? "neg" : "") +
         (r.pe != null ? kpi("Ponto de equilíbrio", num(r.pe) + " un.", "no mix atual") : kpi("Ponto de equilíbrio", "Inexistente", "margem média não é positiva", "neg")) + "</div>";
-      h += composicao(r) + cvp(r);
+      h += dreGerencial(ex, r) + composicao(r) + cvp(r);
       var b2 = ex.base2 || "segunda base";
       h += '<h3>Resultado por produto</h3><div class="tabela"><table><thead><tr><th>Produto</th><th class="r">MC unit.</th><th class="r">MC total</th><th class="r">Custo absorção (volume)</th><th class="r">Custo absorção (' + esc(b2) + ')</th><th class="r">Lucro bruto (volume)</th></tr></thead><tbody>';
       r.ps.forEach(function (p) {

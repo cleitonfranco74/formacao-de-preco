@@ -94,11 +94,16 @@ OPCAO_EXEMPLO = ('  <optgroup label="Exemplo · livre">\n'
 AJUSTES = [
     ('<select id="sim-exercicio">\n', '<select id="sim-exercicio">\n' + OPCAO_EXEMPLO),
     ('<select id="pr-exercicio">\n', '<select id="pr-exercicio">\n' + OPCAO_EXEMPLO),
+    ('<select id="abs-exercicio">\n', '<select id="abs-exercicio">\n' + OPCAO_EXEMPLO),
     ('<p class="lead">Escolha qualquer exercício e produto, ajuste os percentuais e veja o preço sugerido, o preço mínimo e o custo-meta.</p>',
      '<p class="lead">Escolha um exercício e um produto, ajuste os percentuais e veja o preço sugerido, o preço mínimo e o custo-meta. '
      'A empresa-exemplo é livre; os exercícios 🔒 são liberados com a senha do gabarito de cada um.</p>'),
-    ('<p class="lead">Escolha qualquer um dos 17 exercícios, mude preços e volumes',
+    ('<p class="lead">Escolha um exercício, mude preços e volumes',
      '<p class="lead">Comece pela empresa-exemplo (os exercícios 🔒 são liberados com a senha do gabarito de cada um), mude preços e volumes'),
+    ('<p class="lead">Escolha um exercício, a base de rateio',
+     '<p class="lead">Comece pela empresa-exemplo (os exercícios 🔒 são liberados com a senha do gabarito de cada um), escolha a base de rateio'),
+    ('      if (!ex) { camposAbs.innerHTML = ""; saidaAbs.innerHTML = ""; return; }\n',
+     '      if (!ex) { camposAbs.innerHTML = ""; saidaAbs.innerHTML = formModelo(selAbs.value); return; }\n'),
     ('  try { MODELO = JSON.parse(document.getElementById("dados-modelo").textContent); } catch (e) {}\n',
      '  try { MODELO = JSON.parse(document.getElementById("dados-modelo").textContent); } catch (e) {}\n'
      '  // exercícios protegidos: os dados chegam cifrados e são liberados com a senha do exercício\n'
@@ -110,7 +115,7 @@ AJUSTES = [
      '      \'<button type="submit" class="btn peq">Desbloquear</button></form><p class="erro" aria-live="polite"></p></div>\';\n'
      '  }\n'
      '  function marcarBloqueados() {\n'
-     '    document.querySelectorAll("#sim-exercicio option, #pr-exercicio option").forEach(function (o) {\n'
+     '    document.querySelectorAll("#sim-exercicio option, #pr-exercicio option, #abs-exercicio option").forEach(function (o) {\n'
      '      o.textContent = o.textContent.replace(/ 🔒$/, "") + (MODELO[o.value] ? "" : " 🔒");\n'
      '    });\n'
      '  }\n'),
@@ -135,6 +140,7 @@ AJUSTES = [
      '    MODELO[ev.detail.id] = ev.detail.dados;\n'
      '    marcarBloqueados();\n'
      '    if (sim && selSim.value === ev.detail.id) montar();\n'
+     '    if (abs && selAbs.value === ev.detail.id) montarAbs();\n'
      '    if (calc && selEx.value === ev.detail.id) trocarExercicio();\n'
      '  });\n'
      '  marcarBloqueados();\n})();'),

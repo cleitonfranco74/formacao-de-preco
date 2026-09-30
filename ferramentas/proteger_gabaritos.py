@@ -9,7 +9,10 @@ O que o script faz, para cada exercício listado em PROTEGER:
   1. troca o "Gabarito comentado" do index.html por um bloco cifrado com um
      campo de senha;
   2. cifra o gabarito .docx em arquivos/<nome>.docx.enc, APAGA o .docx original
-     e troca os links de download por botões que pedem a senha.
+     e troca os links de download por botões que pedem a senha;
+  3. cifra os dados do exercício usados pelo simulador e pela calculadora de
+     preço (que resolveriam o exercício). Essas ferramentas passam a abrir com
+     uma empresa-exemplo livre (EXEMPLO) e liberam cada exercício com a senha dele.
 
 Uso (rode depois de gerar o site, a partir da raiz do repositório):
     python ferramentas/proteger_gabaritos.py
@@ -68,6 +71,75 @@ FORMULARIO = """<div class="cadeado" data-secao="{secao}" data-cifra="{cifra}">
         <p class="erro" aria-live="polite"></p>
       </div>"""
 
+# empresa fictícia, sempre liberada no simulador e na calculadora
+EXEMPLO = {
+    "empresa": "Sorvetes Ipê Amarelo (exemplo)", "tipo": "mc", "base2": "MOD",
+    "produtos": [
+        {"nome": "Picolé", "un": "un.", "volume": 300000, "preco": 3.0, "comissao": 0.05,
+         "frete": 0.10, "embalagem": 0.05, "base2": 0.01, "cvu": 0.90},
+        {"nome": "Pote de sorvete 2 L", "un": "pote", "volume": 60000, "preco": 28.0, "comissao": 0.05,
+         "frete": 1.0, "embalagem": 0.80, "base2": 0.10, "cvu": 11.0},
+        {"nome": "Açaí 1 L", "un": "pote", "volume": 40000, "preco": 22.0, "comissao": 0.05,
+         "frete": 0.80, "embalagem": 0.60, "base2": 0.08, "cvu": 9.5},
+    ],
+    "cif": 420000, "df": 180000, "markup": None,
+    "terceirizacao": {"produto": 2, "valor": 390000},
+    "pedido": {"produto": 0, "qtd": 50000, "preco": 2.10},
+}
+OPCAO_EXEMPLO = ('  <optgroup label="Exemplo · livre">\n'
+                 '    <option value="exemplo" selected>Sorvetes Ipê Amarelo (empresa-exemplo)</option>\n'
+                 '  </optgroup>\n')
+
+# (trecho original, trecho novo) aplicados às ferramentas interativas
+AJUSTES = [
+    ('<select id="sim-exercicio">\n', '<select id="sim-exercicio">\n' + OPCAO_EXEMPLO),
+    ('<select id="pr-exercicio">\n', '<select id="pr-exercicio">\n' + OPCAO_EXEMPLO),
+    ('<p class="lead">Escolha qualquer exercício e produto, ajuste os percentuais e veja o preço sugerido, o preço mínimo e o custo-meta.</p>',
+     '<p class="lead">Escolha um exercício e um produto, ajuste os percentuais e veja o preço sugerido, o preço mínimo e o custo-meta. '
+     'A empresa-exemplo é livre; os exercícios 🔒 são liberados com a senha do gabarito de cada um.</p>'),
+    ('<p class="lead">Escolha qualquer um dos 17 exercícios, mude preços e volumes',
+     '<p class="lead">Comece pela empresa-exemplo (os exercícios 🔒 são liberados com a senha do gabarito de cada um), mude preços e volumes'),
+    ('  try { MODELO = JSON.parse(document.getElementById("dados-modelo").textContent); } catch (e) {}\n',
+     '  try { MODELO = JSON.parse(document.getElementById("dados-modelo").textContent); } catch (e) {}\n'
+     '  // exercícios protegidos: os dados chegam cifrados e são liberados com a senha do exercício\n'
+     '  // (ver "gabaritos protegidos por senha", no fim da página)\n'
+     '  function formModelo(id) {\n'
+     '    return \'<div class="cadeado" data-modelo="\' + esc(id) + \'"><p>Os dados deste exercício são liberados com a senha do gabarito dele, \' +\n'
+     '      "fornecida pelo professor. Enquanto isso, use a empresa-exemplo.</p>" +\n'
+     '      \'<form class="desbloquear"><input type="password" autocomplete="current-password" aria-label="Senha do exercício" placeholder="Senha do exercício" required>\' +\n'
+     '      \'<button type="submit" class="btn peq">Desbloquear</button></form><p class="erro" aria-live="polite"></p></div>\';\n'
+     '  }\n'
+     '  function marcarBloqueados() {\n'
+     '    document.querySelectorAll("#sim-exercicio option, #pr-exercicio option").forEach(function (o) {\n'
+     '      o.textContent = o.textContent.replace(/ 🔒$/, "") + (MODELO[o.value] ? "" : " 🔒");\n'
+     '    });\n'
+     '  }\n'),
+    ('    var montar = function () {\n      var ex = MODELO[selSim.value];\n',
+     '    var montar = function () {\n      var ex = MODELO[selSim.value];\n'
+     '      if (!ex) { campos.innerHTML = ""; saida.innerHTML = formModelo(selSim.value); return; }\n'),
+    ('    var simular = function () {\n      var ex = MODELO[selSim.value];\n',
+     '    var simular = function () {\n      var ex = MODELO[selSim.value];\n      if (!ex) return;\n'),
+    ('window.addEventListener("simulador:exercicio", function (ev) { if (MODELO[ev.detail]) {',
+     'window.addEventListener("simulador:exercicio", function (ev) { if ([].some.call(selSim.options, function (o) { return o.value === ev.detail; })) {'),
+    ('    var trocarExercicio = function () {\n',
+     '    var trocarExercicio = function () {\n'
+     '      if (!MODELO[selEx.value]) { selProd.innerHTML = ""; res.innerHTML = formModelo(selEx.value); nota.textContent = ""; return; }\n'),
+    ('      var p = MODELO[selEx.value].produtos[+selProd.value];\n',
+     '      if (!MODELO[selEx.value]) return;\n      var p = MODELO[selEx.value].produtos[+selProd.value];\n'),
+    ('      var ex = MODELO[selEx.value], r = calcular(ex), p = r.ps[+selProd.value];\n',
+     '      if (!MODELO[selEx.value]) return;\n      var ex = MODELO[selEx.value], r = calcular(ex), p = r.ps[+selProd.value];\n'),
+    ('    trocarExercicio();\n  }\n})();',
+     '    trocarExercicio();\n  }\n\n'
+     '  // exercício liberado pela senha: entra no simulador e na calculadora\n'
+     '  window.addEventListener("modelo:liberado", function (ev) {\n'
+     '    MODELO[ev.detail.id] = ev.detail.dados;\n'
+     '    marcarBloqueados();\n'
+     '    if (sim && selSim.value === ev.detail.id) montar();\n'
+     '    if (calc && selEx.value === ev.detail.id) trocarExercicio();\n'
+     '  });\n'
+     '  marcarBloqueados();\n})();'),
+]
+
 CSS = """
 /* ---------- gabaritos protegidos por senha ---------- */
 .cadeado{display:grid;gap:10px;max-width:460px}
@@ -101,8 +173,16 @@ JS = r"""
     if (!window.crypto || !crypto.subtle) return Promise.reject(new Error("sem-cripto"));
     var p = PROTECAO.secoes[secao];
     return derivarChave(senha, p.salt).then(function (k) {
-      return decifrar(k, deB64(p.teste)).then(function () { chaves[secao] = k; return k; },
+      return decifrar(k, deB64(p.teste)).then(function () { chaves[secao] = k; liberarModelo(secao, k); return k; },
         function () { throw new Error("senha"); });
+    });
+  }
+  // dados do exercício para o simulador e a calculadora de preço
+  function liberarModelo(secao, chave) {
+    var d = PROTECAO.secoes[secao].dados;
+    if (!d) return;
+    decifrar(chave, deB64(d)).then(function (buf) {
+      window.dispatchEvent(new CustomEvent("modelo:liberado", { detail: { id: secao, dados: JSON.parse(new TextDecoder().decode(buf)) } }));
     });
   }
   function abrirGabarito(secao, chave) {
@@ -124,7 +204,7 @@ JS = r"""
       var f = ev.target.closest && ev.target.closest("form.desbloquear");
       if (!f) return;
       ev.preventDefault();
-      var secao = f.parentNode.getAttribute("data-secao"), erro = f.parentNode.querySelector(".erro"), bt = f.querySelector("button");
+      var secao = f.parentNode.getAttribute("data-secao") || f.parentNode.getAttribute("data-modelo"), erro = f.parentNode.querySelector(".erro"), bt = f.querySelector("button");
       bt.disabled = true; erro.textContent = "";
       obterChave(secao, f.querySelector("input").value).then(function (k) { abrirGabarito(secao, k); },
         function (e) { erro.textContent = msgErro(e); })
@@ -192,6 +272,10 @@ def main():
 
     senhas = carregar_senhas()
     params = {"iter": ITERACOES, "secoes": {}}
+    m_modelo = re.search(r'(<script type="application/json" id="dados-modelo">)(.*?)(</script>)', html, re.S)
+    if not m_modelo:
+        sys.exit("Dados do simulador (dados-modelo) não encontrados.")
+    modelo = json.loads(m_modelo.group(2))
 
     for secao, nome in PROTEGER.items():
         salt = os.urandom(16)
@@ -204,6 +288,9 @@ def main():
             return iv + aes.encrypt(iv, dados, None)
 
         params["secoes"][secao] = {"salt": b64(salt), "teste": b64(cifrar(b"ok"))}
+        if secao in modelo:
+            dados = json.dumps(modelo.pop(secao), ensure_ascii=False).encode("utf-8")
+            params["secoes"][secao]["dados"] = b64(cifrar(dados))
 
         # 1. gabarito comentado
         padrao = re.compile(
@@ -228,7 +315,15 @@ def main():
                       f'data-enc="arquivos/{nome}.enc" data-nome="{nome}">{m.group(1)} 🔒</button>', html)
         print(f"cifrado: {secao} (gabarito comentado + {nome}, {n} links)")
 
-    # 3. parâmetros, estilo e script
+    # 3. simulador e calculadora: só a empresa-exemplo fica aberta
+    modelo = {"exemplo": EXEMPLO, **modelo}
+    html = html.replace(m_modelo.group(0), m_modelo.group(1) + json.dumps(modelo, ensure_ascii=False) + m_modelo.group(3), 1)
+    for antigo, novo in AJUSTES:
+        if html.count(antigo) != 1:
+            sys.exit(f"Trecho das ferramentas não encontrado (ou repetido): {antigo[:60]!r}")
+        html = html.replace(antigo, novo, 1)
+
+    # 4. parâmetros, estilo e script
     html = html.replace('<script type="application/json" id="dados-modelo">',
                         '<script type="application/json" id="protecao-gabaritos">' + json.dumps(params) + '</script>\n'
                         '<script type="application/json" id="dados-modelo">', 1)

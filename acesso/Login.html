@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<style>
+  :root{--bg:#f5f5f7;--surface:#fff;--ink:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--accent:#0b7a43;--soft:#eaf4ee;--crit:#b3261e}
+  @media (prefers-color-scheme:dark){:root{--bg:#000;--surface:#1c1c1e;--ink:#f5f5f7;--muted:#a1a1a6;--line:#3a3a3c;--accent:#34c47c;--soft:#12291c;--crit:#ff6b5e}}
+  body{margin:0;padding:16px;background:var(--bg);color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  main{max-width:520px;margin:32px auto;background:var(--surface);border-radius:18px;padding:28px}
+  h1{font-size:26px;line-height:1.2;margin:0 0 12px;letter-spacing:-.02em}
+  .muted{color:var(--muted);font-size:14px;margin:0 0 4px}
+  label{display:grid;gap:6px;font-size:14px;font-weight:600;margin:14px 0}
+  input,select{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink)}
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:980px;padding:11px 22px;font:inherit;font-size:16px;text-decoration:none;cursor:pointer}
+  .btn[disabled]{opacity:.5}
+  .aviso{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:14px;margin:16px 0}
+  .check{display:flex;gap:10px;align-items:flex-start;font-weight:400}
+  .check input{margin-top:4px}
+  .erro{color:var(--crit);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+  <p class="muted">UNEMAT · Câmpus de Sinop</p>
+  <h1>Contabilidade para Formação de Preço</h1>
+
+<? if (!permitido) { ?>
+  <p>Para acessar o material, entre com a sua conta institucional <b>@<?= dominio ?></b>.</p>
+  <? if (email) { ?><p class="muted">Você está usando a conta <?= email ?>.</p><? } ?>
+  <p><a class="btn" href="https://accounts.google.com/AccountChooser">Trocar de conta</a></p>
+
+<? } else if (nome) { ?>
+  <p>Olá, <b><?= nome ?></b>.</p>
+  <p><a class="btn" id="entrar">Entrar no material</a></p>
+
+<? } else { ?>
+  <p>Primeiro acesso: complete o cadastro. Conta: <b><?= email ?></b></p>
+  <form id="cadastro">
+    <label>Nome completo<input name="nome" autocomplete="name" required></label>
+    <label>Matrícula<input name="matricula" required></label>
+    <label>Curso
+      <select name="curso" required>
+        <option value="">Escolha…</option>
+        <? cursos.forEach(function (c) { ?><option><?= c ?></option><? }); ?>
+      </select>
+    </label>
+    <div class="aviso">
+      Ao se cadastrar, você autoriza o registro do seu nome, matrícula, curso, e-mail institucional e das páginas
+      que acessar neste material. Os dados são usados apenas pelo professor da disciplina para acompanhar a
+      participação, ficam numa planilha de acesso restrito e são apagados ao final do semestre letivo
+      (Lei Geral de Proteção de Dados, Lei nº 13.709/2018).
+    </div>
+    <label class="check"><input type="checkbox" name="consentimento" required> Li e concordo com o registro desses dados.</label>
+    <button class="btn" type="submit">Cadastrar</button>
+    <p class="erro" id="erro" aria-live="polite"></p>
+  </form>
+  <p id="pronto" hidden><a class="btn" id="entrar">Entrar no material</a></p>
+<? } ?>
+</main>
+
+<script>
+  var volta = <?!= JSON.stringify(volta) ?>, token = <?!= JSON.stringify(token) ?>;  // validados no servidor
+  var entrar = document.getElementById("entrar");
+  if (entrar && token) entrar.href = volta + "#acesso=" + token;
+  var form = document.getElementById("cadastro");
+  if (form) form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var botao = form.querySelector("button"), erro = document.getElementById("erro");
+    botao.disabled = true;
+    erro.textContent = "";
+    google.script.run
+      .withSuccessHandler(function (r) {
+        form.hidden = true;
+        entrar.href = volta + "#acesso=" + r.token;
+        entrar.textContent = "Entrar no material, " + r.nome.split(" ")[0];
+        document.getElementById("pronto").hidden = false;
+      })
+      .withFailureHandler(function (e) { botao.disabled = false; erro.textContent = e.message; })
+      .cadastrar({ nome: form.nome.value, matricula: form.matricula.value, curso: form.curso.value,
+        consentimento: form.consentimento.checked });
+  });
+</script>
+</body>
+</html>

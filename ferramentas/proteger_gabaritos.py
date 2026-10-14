@@ -57,6 +57,11 @@ PROTEGER = {
     "racoes-cerrado-forte-p3": "Racoes_Cerrado_Forte_Formacao_Precos_Gabarito.docx",
 }
 
+# exercícios de PROTEGER cujo gabarito segue com senha, mas cujos dados ficam livres no simulador e na calculadora
+SIMULADOR_LIVRE = {
+    "metalurgica-portal-do-cerrado-p1",
+}
+
 FORMULARIO = """<div class="cadeado" data-secao="{secao}" data-cifra="{cifra}">
         <p>Este gabarito é protegido por senha. Informe a senha deste exercício, fornecida pelo professor.</p>
         <form class="desbloquear">
@@ -289,7 +294,7 @@ def main():
             return iv + aes.encrypt(iv, dados, None)
 
         params["secoes"][secao] = {"salt": b64(salt), "teste": b64(cifrar(b"ok"))}
-        if secao in modelo:
+        if secao in modelo and secao not in SIMULADOR_LIVRE:
             dados = json.dumps(modelo.pop(secao), ensure_ascii=False).encode("utf-8")
             params["secoes"][secao]["dados"] = b64(cifrar(dados))
 

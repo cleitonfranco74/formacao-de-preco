@@ -43,8 +43,6 @@ SENHAS = os.path.join(RAIZ, "senhas_gabaritos.json")
 
 # id da seção do exercício -> gabarito .docx correspondente
 PROTEGER = {
-    "agroindustria-grao-dourado-p1": "Agroindustria_Grao_Dourado_Custos_MC_Gabarito.docx",
-    "agroindustria-grao-dourado-p2": "Agroindustria_Grao_Dourado_Custeio_Absorcao_Gabarito.docx",
     "cervejaria-serra-azul-p1": "Cervejaria_Serra_Azul_Custos_MC_Gabarito.docx",
     "cervejaria-serra-azul-p2": "Cervejaria_Serra_Azul_Custeio_Absorcao_Gabarito.docx",
     "usina-milho-ouro-bioenergia-p1": "Usina_Milho_Ouro_Custos_MC_Gabarito.docx",

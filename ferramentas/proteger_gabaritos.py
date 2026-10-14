@@ -48,7 +48,6 @@ PROTEGER = {
     "confeccoes-serra-do-cerrado-p1": "Confeccoes_Serra_do_Cerrado_Custos_MC_Gabarito.docx",
     "confeccoes-serra-do-cerrado-p2": "Confeccoes_Serra_do_Cerrado_Custeio_Absorcao_Gabarito.docx",
     "metalurgica-portal-do-cerrado-p1": "Metalurgica_Portal_do_Cerrado_Custos_MC_Gabarito.docx",
-    "metalurgica-portal-do-cerrado-p2": "Metalurgica_Portal_do_Cerrado_Custeio_Absorcao_Gabarito.docx",
     "panificadora-trigo-dourado-p1": "Panificadora_Trigo_Dourado_Custos_MC_Gabarito.docx",
     "panificadora-trigo-dourado-p2": "Panificadora_Trigo_Dourado_Custeio_Absorcao_Gabarito.docx",
     "plasticos-vale-do-teles-pires-p1": "Plasticos_Vale_do_Teles_Pires_Custos_MC_Gabarito.docx",

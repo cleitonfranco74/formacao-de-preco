@@ -52,6 +52,7 @@ PROTEGER = {
     "panificadora-trigo-dourado-p2": "Panificadora_Trigo_Dourado_Custeio_Absorcao_Gabarito.docx",
     "plasticos-vale-do-teles-pires-p1": "Plasticos_Vale_do_Teles_Pires_Custos_MC_Gabarito.docx",
     "plasticos-vale-do-teles-pires-p2": "Plasticos_Vale_do_Teles_Pires_Custeio_Absorcao_Gabarito.docx",
+    "agropecuaria-celeiro-do-nortao-p2": "Agropecuaria_Celeiro_do_Nortao_Custeio_Absorcao_Gabarito.docx",
     "laticinios-nortao-p3": "Laticinios_Nortao_Formacao_Precos_Gabarito.docx",
     "moveis-portal-da-amazonia-p3": "Moveis_Portal_da_Amazonia_Formacao_Precos_Gabarito.docx",
     "racoes-cerrado-forte-p3": "Racoes_Cerrado_Forte_Formacao_Precos_Gabarito.docx",

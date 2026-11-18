@@ -5453,7 +5453,7 @@ tr.aval td{color:var(--nova)}
 <nav class="localnav" aria-label="Seções de Formação de preços">
   <div class="wrap">
     <a class="titulo-local" href="#p3-topo">Formação de preços</a>
-    <a href="#p3-markup">Markup</a><a href="#p3-metodos">Absorção × variável</a><a href="#p3-meta">Custo-meta</a><a href="#calculadora">Calculadora</a>
+    <a href="#p3-markup">Markup</a><a href="#p3-metodos">Absorção × variável</a><a href="#p3-meta">Custo-meta</a><a href="#p3-decisao">Decisões</a><a href="#calculadora">Calculadora</a>
     <a class="pilula" href="#p3-atividades">Atividades</a>
   </div>
 </nav>
@@ -5504,6 +5504,166 @@ tr.aval td{color:var(--nova)}
     <div class="formula">Preço mínimo (curto prazo) = (Custo variável + frete) ÷ (1 − % comissão)</div>
     <div class="formula">Custo-meta = Preço de mercado × Markup divisor − frete</div>
     <figure class="viz"><h4>Régua de preços: do preço mínimo ao preço de mercado</h4><p class="small muted" style="margin:0">Laticínios Nortão, queijo muçarela. A faixa verde vai do preço mínimo de curto prazo até o preço de mercado.</p><svg class="graf" viewBox="0 0 760 170" role="img" aria-label="Régua de preços do queijo muçarela"><rect x="144.6" y="76" width="497.9" height="16" rx="3" fill="var(--s3)" opacity=".18"/><line class="eixo" x1="30" x2="730" y1="84" y2="84"/><line class="eixo" x1="30.0" x2="30.0" y1="80" y2="88"/><text x="30.0" y="104" text-anchor="middle">18</text><line class="eixo" x1="117.5" x2="117.5" y1="80" y2="88"/><text x="117.5" y="104" text-anchor="middle">20</text><line class="eixo" x1="205.0" x2="205.0" y1="80" y2="88"/><text x="205.0" y="104" text-anchor="middle">22</text><line class="eixo" x1="292.5" x2="292.5" y1="80" y2="88"/><text x="292.5" y="104" text-anchor="middle">24</text><line class="eixo" x1="380.0" x2="380.0" y1="80" y2="88"/><text x="380.0" y="104" text-anchor="middle">26</text><line class="eixo" x1="467.5" x2="467.5" y1="80" y2="88"/><text x="467.5" y="104" text-anchor="middle">28</text><line class="eixo" x1="555.0" x2="555.0" y1="80" y2="88"/><text x="555.0" y="104" text-anchor="middle">30</text><line class="eixo" x1="642.5" x2="642.5" y1="80" y2="88"/><text x="642.5" y="104" text-anchor="middle">32</text><line class="eixo" x1="730.0" x2="730.0" y1="80" y2="88"/><text x="730.0" y="104" text-anchor="middle">34</text><polyline points="144.6,84 144.6,54 186.0,54" fill="none" stroke="var(--s3)" stroke-width="1.5"/><text x="192.0" y="58" text-anchor="start" class="rot-forte">Preço mínimo (curto prazo) · 20,62</text><circle cx="144.6" cy="84" r="6" fill="var(--s3)" stroke="var(--surface)" stroke-width="2" data-tip="Preço mínimo (curto prazo)<br><b>$ 20,6186</b>"/><polyline points="161.2,84 161.2,32 186.0,32" fill="none" stroke="var(--s4)" stroke-width="1.5"/><text x="192.0" y="36" text-anchor="start" class="rot-forte">Oferta do supermercado · 21,00</text><circle cx="161.2" cy="84" r="6" fill="var(--s4)" stroke="var(--surface)" stroke-width="2" data-tip="Oferta do supermercado<br><b>$ 21,0000</b>"/><polyline points="170.0,84 170.0,10 186.0,10" fill="none" stroke="var(--s2)" stroke-width="1.5"/><text x="192.0" y="14" text-anchor="start" class="rot-forte">Custo por absorção + frete · 21,20</text><circle cx="170.0" cy="84" r="6" fill="var(--s2)" stroke="var(--surface)" stroke-width="2" data-tip="Custo por absorção + frete<br><b>$ 21,2000</b>"/><line x1="431.6" x2="431.6" y1="84" y2="126" stroke="var(--s1)" stroke-width="1.5"/><text x="431.6" y="140" text-anchor="middle" class="rot-forte">Preço sugerido (markup) · 27,18</text><circle cx="431.6" cy="84" r="6" fill="var(--s1)" stroke="var(--surface)" stroke-width="2" data-tip="Preço sugerido (markup)<br><b>$ 27,1795</b>"/><line x1="642.5" x2="642.5" y1="84" y2="126" stroke="var(--ink)" stroke-width="1.5"/><text x="642.5" y="140" text-anchor="middle" class="rot-forte">Preço de mercado · 32,00</text><circle cx="642.5" cy="84" r="6" fill="var(--ink)" stroke="var(--surface)" stroke-width="2" data-tip="Preço de mercado<br><b>$ 32,0000</b>"/><text x="730" y="104" text-anchor="end" dx="0" dy="18">$ por kg</text></svg><figcaption class="small muted">A oferta de $ 21,00 fica abaixo do custo por absorção + frete, mas acima do preço mínimo: com capacidade ociosa, o lote aumenta o resultado. O preço sugerido pelo markup é a referência de longo prazo.</figcaption></figure>
+  </div>
+</section>
+
+<section class="bloco" id="p3-decisao">
+  <div class="wrap">
+    <div class="secao-cab"><h2>Quatro preços, uma decisão.</h2>
+      <p class="lead">Formar preço não é fazer uma conta: é responder a quatro perguntas diferentes. Cada uma tem a sua fórmula e serve a uma decisão diferente.</p></div>
+    <div class="grid g2">
+      <div class="card"><h3>1. Quanto eu quero cobrar?</h3><p><b>Preço sugerido</b> (markup). Parte do custo e acrescenta despesas e lucro desejado.
+        É o ponto de vista da empresa e vale para o <b>longo prazo</b>: se vender tudo a esse preço, todos os custos são cobertos e o lucro desejado aparece.</p></div>
+      <div class="card"><h3>2. Quanto o cliente aceita pagar?</h3><p><b>Preço de mercado</b>. É dado pelos concorrentes, pelo valor que o cliente percebe ou,
+        nas commodities, pela bolsa. A empresa não o escolhe: só decide se vende e quanto vende a esse preço.</p></div>
+      <div class="card"><h3>3. Até onde posso descer?</h3><p><b>Preço mínimo</b>. Cobre só os gastos que a venda provoca (custo variável, frete, comissão).
+        Vale no <b>curto prazo</b> e com capacidade ociosa, para um pedido extra que não substitui vendas normais.</p></div>
+      <div class="card"><h3>4. Quanto posso gastar para produzir?</h3><p><b>Custo-meta</b>. Faz o caminho inverso: parte do preço de mercado, desconta despesas
+        e lucro, e chega ao custo máximo que a empresa precisa alcançar. É a resposta quando o mercado paga menos que o preço sugerido.</p></div>
+    </div>
+    <div class="formula">Preço sugerido = (Custo por absorção + frete) ÷ (1 − % comissão − % adm. − % lucro)</div>
+    <div class="formula">Preço de equilíbrio (lucro zero) = (Custo por absorção + frete) ÷ (1 − % comissão − % adm.)</div>
+    <div class="formula">Preço mínimo (curto prazo) = (Custo variável + frete) ÷ (1 − % comissão)</div>
+    <div class="formula">Custo-meta = Preço de mercado × (1 − % comissão − % adm. − % lucro) − frete</div>
+
+    <h3>Exemplo resolvido: Torrefação Serra Nova</h3>
+    <p>Uma torrefação de Sinop vende café torrado e moído em pacotes de 500 g. Ela prevê vender 100.000 pacotes por ano e tem capacidade para 130.000.</p>
+    <div class="tabela"><table style="min-width:620px">
+      <tr><th>Dado</th><th class="r">Valor</th></tr>
+      <tr><td>Custo variável por pacote: café verde $ 7,20 + embalagem $ 0,80 + MOD $ 1,00</td><td class="r num">$ 9,00</td></tr>
+      <tr><td>Custos fixos de produção: $ 300.000 por ano ÷ 100.000 pacotes</td><td class="r num">$ 3,00</td></tr>
+      <tr class="total"><td>Custo por absorção por pacote</td><td class="r num">$ 12,00</td></tr>
+      <tr><td>Frete por pacote</td><td class="r num">$ 0,50</td></tr>
+      <tr><td>Comissão / despesas administrativas / lucro desejado (% do preço)</td><td class="r num">5% / 10% / 15%</td></tr>
+      <tr><td>Preço de mercado (cafés concorrentes na mesma prateleira)</td><td class="r num">$ 16,00</td></tr>
+    </table></div>
+    <div class="tabela"><table style="min-width:620px">
+      <tr><th>Pergunta</th><th>Cálculo</th><th class="r">Resposta</th></tr>
+      <tr><td>Markup divisor</td><td>1 − (5% + 10% + 15%)</td><td class="r num">0,70</td></tr>
+      <tr><td>1. Quanto quero cobrar?</td><td>(12,00 + 0,50) ÷ 0,70</td><td class="r num">$ 17,8571</td></tr>
+      <tr><td>Preço de equilíbrio (lucro zero)</td><td>(12,00 + 0,50) ÷ 0,85</td><td class="r num">$ 14,7059</td></tr>
+      <tr><td>2. Quanto o cliente paga?</td><td>dado pelo mercado</td><td class="r num">$ 16,00</td></tr>
+      <tr><td>3. Até onde posso descer?</td><td>(9,00 + 0,50) ÷ 0,95</td><td class="r num">$ 10,0000</td></tr>
+      <tr><td>4. Quanto posso gastar?</td><td>16,00 × 0,70 − 0,50</td><td class="r num">$ 10,7000</td></tr>
+    </table></div>
+    <h3>A régua de preços: cada faixa, uma decisão</h3>
+    <div class="tabela"><table style="min-width:680px">
+      <tr><th>Faixa de preço</th><th>O que acontece com cada pacote vendido</th><th>Decisão</th></tr>
+      <tr><td>Abaixo de $ 10,00 (preço mínimo)</td><td>Não paga nem o café, a embalagem, a MOD, o frete e a comissão</td><td>Nunca vender: cada venda reduz o resultado</td></tr>
+      <tr><td>De $ 10,00 a $ 14,71</td><td>Paga os gastos variáveis e ajuda a cobrir os fixos, mas não todos</td><td>Só pedidos extras, com capacidade ociosa e sem afetar o preço dos clientes normais</td></tr>
+      <tr><td>De $ 14,71 a $ 17,86</td><td>Cobre todos os custos e despesas e deixa lucro, mas menor que o desejado</td><td>Vender, e trabalhar o custo (custo-meta) para recuperar a margem</td></tr>
+      <tr><td>Acima de $ 17,86</td><td>Lucro igual ou maior que o desejado</td><td>Ótimo, se o mercado aceitar esse preço</td></tr>
+    </table></div>
+    <div class="nota"><p><b>Leitura do exemplo.</b> O mercado paga $ 16,00: acima do equilíbrio ($ 14,71), abaixo do sugerido ($ 17,86).
+      A torrefação tem lucro, mas de $ 1,10 por pacote, 6,9% do preço, e não 15%. Subir o preço para $ 17,86 faria
+      o cliente trocar de marca. A saída é o <b>custo-meta</b>: o custo de produção precisa cair de $ 12,00 para $ 10,70, uma redução de
+      $ 1,30 por pacote (10,8%): negociar o café verde, reduzir perdas na torra, aumentar o volume para diluir os fixos.</p></div>
+
+    <h3>Três pedidos, três respostas</h3>
+    <p>Um supermercado propõe comprar 20.000 pacotes a um preço especial, com a sua própria marca.</p>
+    <div class="tabela"><table style="min-width:680px">
+      <tr><th>Situação</th><th>Conta por pacote</th><th class="r">Efeito no resultado</th><th>Decisão</th></tr>
+      <tr><td><b>A.</b> $ 12,00, fábrica com capacidade ociosa</td><td>12,00 − 0,60 de comissão − 0,50 de frete − 9,00 = <b>+1,90</b></td><td class="r num">+38.000,00</td><td>Aceitar: preço acima do mínimo ($ 10,00)</td></tr>
+      <tr><td><b>B.</b> $ 12,00, fábrica cheia: o pedido tomaria o lugar de vendas a $ 16,00</td><td>ganha 1,90, mas perde a margem normal de 5,70: <b>−3,80</b></td><td class="r num">−76.000,00</td><td>Recusar: com a fábrica cheia, o preço mínimo sobe para $ 16,00</td></tr>
+      <tr><td><b>C.</b> $ 9,80, capacidade ociosa</td><td>9,80 − 0,49 − 0,50 − 9,00 = <b>−0,19</b></td><td class="r num">−3.800,00</td><td>Recusar: abaixo do preço mínimo</td></tr>
+    </table></div>
+    <div class="nota alerta"><p><b>Cuidados com o preço mínimo.</b> (1) Ele só vale com capacidade ociosa; sem ela, a margem perdida das vendas normais é um custo da decisão.
+      (2) O pedido não pode "contaminar" o preço dos clientes atuais: se eles souberem e exigirem o mesmo preço, o ganho vira perda.
+      (3) É uma decisão de curto prazo: uma empresa que vende sempre perto do preço mínimo não cobre os custos fixos e quebra.</p></div>
+
+    <h3>Erros comuns</h3>
+    <div class="grid g2">
+      <div class="card"><h3>Multiplicar em vez de dividir</h3><p>Custo × (1 + 30%) não deixa 15% de lucro, porque comissão e despesas incidem sobre o preço.
+        No exemplo, 12,50 × 1,30 = $ 16,25: o lucro efetivo seria 1 − 15% − 12,50 ÷ 16,25 = 8,1%, e não 15%.</p></div>
+      <div class="card"><h3>Recusar pedido abaixo do custo por absorção</h3><p>Com capacidade ociosa, os fixos já estão pagos pela produção normal. O pedido A
+        fica abaixo do custo por absorção mais frete ($ 12,50) e mesmo assim aumenta o resultado em $ 38.000.</p></div>
+      <div class="card"><h3>Achar que o preço sugerido é o preço</h3><p>Ele é só o que a empresa gostaria de cobrar. Quem decide é o mercado; em commodities
+        (grãos, carne, leite), o produtor é tomador de preço e só pode agir sobre o custo.</p></div>
+      <div class="card"><h3>Esquecer que o custo depende do volume e do rateio</h3><p>Com 80.000 pacotes em vez de 100.000, o fixo por pacote sobe de $ 3,00
+        para $ 3,75 e o preço sugerido sobe junto. O custo por absorção é uma estimativa, não uma verdade.</p></div>
+    </div>
+
+    <h3 id="p3-exercicios-decisao">Exercícios de fixação: Polpas Açaí Norte</h3>
+    <p>Uma fábrica de polpa de açaí de Alta Floresta vende o quilo de polpa congelada. Custo variável $ 6,00/kg; custos fixos de produção de $ 2,00/kg no volume previsto;
+      frete $ 0,40/kg; comissão 4%, despesas administrativas 8% e lucro desejado 13% sobre o preço. O mercado paga $ 10,00/kg.
+      Uma rede de sorveterias propõe comprar 15.000 kg extras a $ 7,00/kg.</p>
+    <div class="pratica" data-slug="precos-decisao">
+      <ol class="perguntas">
+        <li class="perg" data-i="0" data-tipo="num" data-resp="0.75" data-casas="4" data-dica="1 − (comissão + despesas administrativas + lucro).">
+          <p class="enunc">1. Markup divisor da Açaí Norte</p>
+          <div class="resposta">
+            <input type="text" inputmode="decimal" aria-label="1. Markup divisor da Açaí Norte" placeholder="Sua resposta">
+            <button type="button" class="btn peq conferir">Conferir</button>
+          </div>
+          <p class="fb" aria-live="polite"></p>
+        </li>
+        <li class="perg" data-i="1" data-tipo="num" data-resp="11.2" data-casas="4" data-dica="(Custo variável + fixo por unidade + frete) ÷ markup divisor.">
+          <p class="enunc">2. Preço sugerido pelo custo por absorção ($/kg)</p>
+          <div class="resposta">
+            <input type="text" inputmode="decimal" aria-label="2. Preço sugerido pelo custo por absorção ($/kg)" placeholder="Sua resposta">
+            <button type="button" class="btn peq conferir">Conferir</button>
+          </div>
+          <p class="fb" aria-live="polite"></p>
+        </li>
+        <li class="perg" data-i="2" data-tipo="num" data-resp="9.5455" data-casas="4" data-dica="(Custo por absorção + frete) ÷ (1 − comissão − despesas adm.). É o preço com lucro zero.">
+          <p class="enunc">3. Preço de equilíbrio, com lucro zero ($/kg)</p>
+          <div class="resposta">
+            <input type="text" inputmode="decimal" aria-label="3. Preço de equilíbrio, com lucro zero ($/kg)" placeholder="Sua resposta">
+            <button type="button" class="btn peq conferir">Conferir</button>
+          </div>
+          <p class="fb" aria-live="polite"></p>
+        </li>
+        <li class="perg" data-i="3" data-tipo="num" data-resp="6.6667" data-casas="4" data-dica="(Custo variável + frete) ÷ (1 − comissão). Os fixos não entram: já estão pagos.">
+          <p class="enunc">4. Preço mínimo de curto prazo, com capacidade ociosa ($/kg)</p>
+          <div class="resposta">
+            <input type="text" inputmode="decimal" aria-label="4. Preço mínimo de curto prazo, com capacidade ociosa ($/kg)" placeholder="Sua resposta">
+            <button type="button" class="btn peq conferir">Conferir</button>
+          </div>
+          <p class="fb" aria-live="polite"></p>
+        </li>
+        <li class="perg" data-i="4" data-tipo="num" data-resp="7.1" data-casas="4" data-dica="Preço de mercado × markup divisor − frete.">
+          <p class="enunc">5. Custo-meta de produção ao preço de mercado de $ 10,00 ($/kg)</p>
+          <div class="resposta">
+            <input type="text" inputmode="decimal" aria-label="5. Custo-meta de produção ao preço de mercado de $ 10,00 ($/kg)" placeholder="Sua resposta">
+            <button type="button" class="btn peq conferir">Conferir</button>
+          </div>
+          <p class="fb" aria-live="polite"></p>
+        </li>
+        <li class="perg" data-i="5" data-tipo="num" data-resp="0.9" data-casas="4" data-dica="Custo atual por absorção − custo-meta.">
+          <p class="enunc">6. Quanto o custo de produção precisa cair ($/kg)</p>
+          <div class="resposta">
+            <input type="text" inputmode="decimal" aria-label="6. Quanto o custo de produção precisa cair ($/kg)" placeholder="Sua resposta">
+            <button type="button" class="btn peq conferir">Conferir</button>
+          </div>
+          <p class="fb" aria-live="polite"></p>
+        </li>
+        <li class="perg" data-i="6" data-tipo="num" data-resp="4800.0" data-casas="2" data-dica="(Preço × (1 − comissão) − frete − custo variável) × quantidade.">
+          <p class="enunc">7. Ganho do pedido de 15.000 kg a $ 7,00, com capacidade ociosa ($)</p>
+          <div class="resposta">
+            <input type="text" inputmode="decimal" aria-label="7. Ganho do pedido de 15.000 kg a $ 7,00, com capacidade ociosa ($)" placeholder="Sua resposta">
+            <button type="button" class="btn peq conferir">Conferir</button>
+          </div>
+          <p class="fb" aria-live="polite"></p>
+        </li>
+        <li class="perg" data-i="7" data-tipo="escolha" data-resp="0" data-casas="2" data-dica="Com capacidade ociosa, compare o preço do pedido com o preço mínimo.">
+          <p class="enunc">8. Esse pedido deve ser aceito?</p>
+          <div class="resposta">
+            <div class="opcoes"><label class="opcao"><input type="radio" name="precos-decisao-q7" value="0"> Aceitar</label><label class="opcao"><input type="radio" name="precos-decisao-q7" value="1"> Recusar</label></div>
+            <button type="button" class="btn peq conferir">Conferir</button>
+          </div>
+          <p class="fb" aria-live="polite"></p>
+        </li>
+        <li class="perg" data-i="8" data-tipo="num" data-resp="10.0" data-casas="4" data-dica="Com a fábrica cheia, some ao custo variável a margem de contribuição que se perde de cada venda normal.">
+          <p class="enunc">9. Preço mínimo do pedido se a fábrica estivesse cheia ($/kg)</p>
+          <div class="resposta">
+            <input type="text" inputmode="decimal" aria-label="9. Preço mínimo do pedido se a fábrica estivesse cheia ($/kg)" placeholder="Sua resposta">
+            <button type="button" class="btn peq conferir">Conferir</button>
+          </div>
+          <p class="fb" aria-live="polite"></p>
+        </li>
+      </ol>
+      <div class="placar-linha"><span class="placar"></span><button type="button" class="btn sec peq recomecar">Recomeçar</button></div>
+    </div>
   </div>
 </section>
 

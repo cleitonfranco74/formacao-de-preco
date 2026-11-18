@@ -57,6 +57,7 @@ PROTEGER = {
     "laticinios-nortao-p3": "Laticinios_Nortao_Formacao_Precos_Gabarito.docx",
     "moveis-portal-da-amazonia-p3": "Moveis_Portal_da_Amazonia_Formacao_Precos_Gabarito.docx",
     "racoes-cerrado-forte-p3": "Racoes_Cerrado_Forte_Formacao_Precos_Gabarito.docx",
+    "agropecuaria-vale-do-juruena-p3": "Agropecuaria_Vale_do_Juruena_Formacao_Precos_Gabarito.docx",
 }
 
 # exercícios de PROTEGER cujo gabarito segue com senha, mas cujos dados ficam livres no simulador e na calculadora
